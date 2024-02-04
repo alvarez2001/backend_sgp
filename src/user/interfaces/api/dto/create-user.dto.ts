@@ -62,7 +62,6 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty({ enum: UserType })
-  @ApiProperty()
   @IsEnum(UserType)
   type: UserType;
 

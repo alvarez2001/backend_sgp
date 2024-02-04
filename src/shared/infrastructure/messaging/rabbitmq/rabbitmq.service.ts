@@ -48,7 +48,7 @@ export class RabbitMQService implements OnModuleDestroy {
           for (const queue of queues) {
             await channel.assertQueue(queue, { durable: true });
             await channel.bindQueue(queue, exchange, '');
-            console.log(`Cola ${queue} vinculada a exchange ${exchange}`);
+            // console.log(`Cola ${queue} vinculada a exchange ${exchange}`);
           }
         } catch (error) {
           console.error(
@@ -85,7 +85,6 @@ export class RabbitMQService implements OnModuleDestroy {
   ) {
     await this.channelWrapper.waitForConnect(async (err) => {
       if (err) {
-        console.log('aca');
         return;
       }
       await this.setupFanoutExchanges();

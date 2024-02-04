@@ -6,38 +6,47 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { UserService } from '../../application/user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
+import { UserReadService } from '../../application/user.read.service';
+import { PaginateResponseDto } from '../../../shared/interfaces/paginate-response.dto';
 
 @ApiTags('users')
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly userReadService: UserReadService,
+  ) {}
 
   @Post()
-  @ApiResponse({ type: UserResponseDto })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
     return this.userService.createUser(createUserDto);
   }
 
   @Get(':id')
-  @ApiResponse({ type: UserResponseDto })
   async findOne(@Param('id') id: number): Promise<UserResponseDto> {
-    return this.userService.findUserById(id);
+    return this.userReadService.findUserById(id);
   }
 
   @Get()
-  @ApiResponse({ type: [UserResponseDto] })
+  async pagination(
+    @Query() query: any,
+  ): Promise<PaginateResponseDto<UserResponseDto>> {
+    return this.userReadService.paginationUsers(query);
+  }
+
+  @Get('/data/list')
   async findAll(): Promise<UserResponseDto[]> {
-    return this.userService.findAllUsers();
+    return this.userReadService.findAllUsers();
   }
 
   @Put(':id')
-  @ApiResponse({ type: UserResponseDto })
   async update(
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,

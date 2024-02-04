@@ -5,12 +5,12 @@ import { appEvents } from '../../../shared/infrastructure/messaging/event-emitte
 import { DeclarationQueues } from '../../../shared/infrastructure/messaging/rabbitmq/declaration-queues';
 import { User } from '../../domain/entity/user.entity';
 import { UserRead } from '../../domain/entity/user.read';
-import { UserCreatedConsumer } from '../consumers/userCreated.consumer';
+import { UserUpdatedConsumer } from '../consumers/userUpdated.consumer';
 
 @Injectable()
-export class UserCreatedPublisher {
+export class UserUpdatedPublisher {
   constructor(private readonly rabbitMQService: RabbitMQService) {
-    appEvents.on(DeclarationQueues.user_created, async (user) => {
+    appEvents.on(DeclarationQueues.user_updated, async (user) => {
       await this.send(user);
     });
   }
@@ -22,7 +22,7 @@ export class UserCreatedPublisher {
       readModel: UserRead.name,
       exchange: DeclarationExchanges.user_exchange,
       displayNames: {
-        [DeclarationQueues.user_created]: UserCreatedConsumer.name,
+        [DeclarationQueues.user_updated]: UserUpdatedConsumer.name,
       },
     };
     await this.rabbitMQService.publishToExchange(

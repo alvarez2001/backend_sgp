@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -27,6 +28,19 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
         subscribers: ['dist/**/*.subscriber{.ts,.js}'],
       }),
     }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: `mongodb://${configService.get('READ_DB_HOST')}:${configService.get('READ_DB_PORT')}`,
+        auth: {
+          username: configService.get('READ_DB_USERNAME'),
+          password: configService.get('READ_DB_PASSWORD'),
+        },
+        dbName: configService.get('READ_DB_DATABASE'),
+      }),
+    }),
+
     UserModule,
   ],
   controllers: [],

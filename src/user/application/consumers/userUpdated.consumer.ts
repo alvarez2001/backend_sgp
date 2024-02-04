@@ -5,7 +5,7 @@ import { DeclarationQueues } from '../../../shared/infrastructure/messaging/rabb
 import { UserReadService } from '../user.read.service';
 
 @Injectable()
-export class UserCreatedConsumer implements OnModuleInit {
+export class UserUpdatedConsumer implements OnModuleInit {
   constructor(
     private readonly rabbitMQService: RabbitMQService,
     private readonly userService: UserReadService,
@@ -13,7 +13,7 @@ export class UserCreatedConsumer implements OnModuleInit {
 
   async onModuleInit() {
     await this.rabbitMQService.consume(
-      DeclarationQueues.user_created,
+      DeclarationQueues.user_updated,
       this.handleMessage.bind(this),
     );
   }
@@ -24,11 +24,11 @@ export class UserCreatedConsumer implements OnModuleInit {
         const data = JSON.parse(JSON.parse(msg.content.toString()));
 
         if (
-          data.displayNames.hasOwnProperty(DeclarationQueues.user_created) &&
-          data.displayNames[DeclarationQueues.user_created] ==
-            UserCreatedConsumer.name
+          data.displayNames.hasOwnProperty(DeclarationQueues.user_updated) &&
+          data.displayNames[DeclarationQueues.user_updated] ==
+            UserUpdatedConsumer.name
         ) {
-          await this.userService.createUser(data.data);
+          await this.userService.updateUser(data.data.id, data.data);
         }
 
         this.rabbitMQService.ack(msg);

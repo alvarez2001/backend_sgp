@@ -4,9 +4,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  AfterInsert,
-  AfterUpdate,
-  AfterRemove,
 } from 'typeorm';
 
 @Entity()
@@ -42,23 +39,8 @@ export class User {
   status: number;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
-
-  @AfterInsert()
-  logInsert() {
-    console.log('Inserting User with id:', this.id);
-  }
-
-  @AfterUpdate()
-  logUpdate() {
-    console.log('Updating User with id:', this.id);
-  }
-
-  @AfterRemove()
-  logRemove() {
-    console.log('Removing User with id:', this.id);
-  }
+  updated_at: Date;
 }
