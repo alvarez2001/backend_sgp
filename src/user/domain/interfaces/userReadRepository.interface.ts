@@ -1,8 +1,8 @@
 import { UserRead } from '../entity/user.read';
 import { CreateUserDto } from '../../interfaces/api/dto/create-user.dto';
 import { UpdateUserDto } from '../../interfaces/api/dto/update-user.dto';
-import { PaginateResponseDto } from '../../../shared/interfaces/paginate-response.dto';
-import { SearchCriteriaDto } from '../../../shared/interfaces/search-criteria.dto';
+import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { SearchCriteriaDto } from 'src/shared/interfaces/search-criteria.dto';
 
 export const USER_READ_REPOSITORY_INTERFACE = 'UserReadRepositoryInterface';
 

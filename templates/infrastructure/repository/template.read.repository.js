@@ -8,9 +8,9 @@ import { ${entityNameCamelCase}Read, ${entityNameCamelCase}ReadDocument } from '
 import { Model } from 'mongoose';
 import { Create${entityNameCamelCase}Dto } from '../../interfaces/api/dto/create-${entityNameLowerCase}.dto';
 import { Update${entityNameCamelCase}Dto } from '../../interfaces/api/dto/update-${entityNameLowerCase}.dto';
-import { BaseReadRepository } from '../../../shared/infrastructure/repository/base.read.repository';
-import { PaginateResponseDto } from '../../../shared/interfaces/paginate-response.dto';
-import { SearchCriteriaDto } from '../../../shared/interfaces/search-criteria.dto';
+import { BaseReadRepository } from 'src/shared/infrastructure/repository/base.read.repository';
+import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { SearchCriteriaDto } from 'src/shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class ${entityNameCamelCase}ReadRepository

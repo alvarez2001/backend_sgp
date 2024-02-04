@@ -2,9 +2,9 @@ module.exports = (
   entityNameLowerCase,
   entityNameCamelCase,
 ) => `import { Injectable, OnModuleInit } from '@nestjs/common';
-import { RabbitMQService } from '../../../shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
+import { RabbitMQService } from 'src/shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
 import { ConsumeMessage } from 'amqplib';
-import { DeclarationQueues } from '../../../shared/infrastructure/messaging/rabbitmq/declaration-queues';
+import { DeclarationQueues } from 'src/shared/infrastructure/messaging/rabbitmq/declaration-queues';
 import { ${entityNameCamelCase}ReadService } from '../${entityNameLowerCase}.read.service';
 
 @Injectable()

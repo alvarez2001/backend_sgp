@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { RabbitmqModule } from '../shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
+import { RabbitmqModule } from 'src/shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
 import { UserCreatedConsumer } from './application/consumers/userCreated.consumer';
 import { UserCreatedPublisher } from './application/publishers/userCreated.publisher';
 import { TypeOrmModule } from '@nestjs/typeorm';
