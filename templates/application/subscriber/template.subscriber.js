@@ -5,8 +5,8 @@ module.exports = (entityNameLowerCase, entityNameCamelCase) => `import {
   UpdateEvent,
 } from 'typeorm';
 import { ${entityNameCamelCase} } from '../../domain/entity/${entityNameLowerCase}.entity';
-import { appEvents } from 'src/shared/infrastructure/messaging/event-emitter';
-import { DeclarationQueues } from 'src/shared/infrastructure/messaging/rabbitmq/declaration-queues';
+import { appEvents } from '@shared/infrastructure/messaging/event-emitter';
+import { DeclarationQueues } from '@shared/infrastructure/messaging/rabbitmq/declaration-queues';
 
 @EventSubscriber()
 export class ${entityNameCamelCase}Subscriber implements EntitySubscriberInterface<${entityNameCamelCase}> {

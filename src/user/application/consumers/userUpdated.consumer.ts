@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { RabbitMQService } from 'src/shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
+import { RabbitMQService } from '@shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
 import { ConsumeMessage } from 'amqplib';
-import { DeclarationQueues } from 'src/shared/infrastructure/messaging/rabbitmq/declaration-queues';
+import { DeclarationQueues } from '@shared/infrastructure/messaging/rabbitmq/declaration-queues';
 import { UserReadService } from '../user.read.service';
 
 @Injectable()

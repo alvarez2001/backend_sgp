@@ -14,7 +14,7 @@ import { Create${entityNameCamelCase}Dto } from './dto/create-${entityNameLowerC
 import { Update${entityNameCamelCase}Dto } from './dto/update-${entityNameLowerCase}.dto';
 import { ${entityNameCamelCase}ResponseDto } from './dto/${entityNameLowerCase}-response.dto';
 import { ${entityNameCamelCase}ReadService } from '../../application/${entityNameLowerCase}.read.service';
-import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 
 @ApiTags('${entityNameLowerCase}s')
 @Controller('${entityNameLowerCase}s')

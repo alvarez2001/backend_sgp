@@ -8,6 +8,7 @@ import { CreateUserDto } from '../interfaces/api/dto/create-user.dto';
 import { UpdateUserDto } from '../interfaces/api/dto/update-user.dto';
 import { UserResponseDto } from '../interfaces/api/dto/user-response.dto';
 import { plainToClass } from 'class-transformer';
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,10 @@ export class UserService {
   async createUser(createUserDto: CreateUserDto): Promise<UserResponseDto> {
     const user = new User();
     Object.assign(user, createUserDto);
+
+    const salt = bcryptjs.genSaltSync();
+    user.password = bcryptjs.hashSync(user.password, salt);
+
     await this.userRepository.create(user);
     return plainToClass(UserResponseDto, user, {
       excludeExtraneousValues: true,
@@ -34,6 +39,12 @@ export class UserService {
       throw new Error('User not found');
     }
     Object.assign(user, updateUserDto);
+
+    if (updateUserDto.password) {
+      const salt = bcryptjs.genSaltSync();
+      user.password = bcryptjs.hashSync(updateUserDto.password, salt);
+    }
+
     await this.userRepository.update(id, user);
     return plainToClass(UserResponseDto, user, {
       excludeExtraneousValues: true,

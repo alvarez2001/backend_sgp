@@ -7,9 +7,9 @@ import {
   USER_READ_REPOSITORY_INTERFACE,
   UserReadRepositoryInterface,
 } from '../domain/interfaces/userReadRepository.interface';
-import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 import { UserRead } from '../domain/entity/user.read';
-import { SearchCriteriaDto } from 'src/shared/interfaces/search-criteria.dto';
+import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class UserReadService {

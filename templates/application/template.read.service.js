@@ -10,9 +10,9 @@ import {
   ${entityNameCamelCase.toUpperCase()}_READ_REPOSITORY_INTERFACE,
   ${entityNameCamelCase}ReadRepositoryInterface,
 } from '../domain/interfaces/${entityNameLowerCase}ReadRepository.interface';
-import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 import { ${entityNameCamelCase}Read } from '../domain/entity/${entityNameLowerCase}.read';
-import { SearchCriteriaDto } from 'src/shared/interfaces/search-criteria.dto';
+import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class ${entityNameCamelCase}ReadService {

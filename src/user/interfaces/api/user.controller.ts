@@ -14,7 +14,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UserReadService } from '../../application/user.read.service';
-import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 
 @ApiTags('users')
 @Controller('users')

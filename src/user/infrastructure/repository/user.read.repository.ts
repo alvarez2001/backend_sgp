@@ -5,9 +5,9 @@ import { UserRead, UserReadDocument } from '../../domain/entity/user.read';
 import { Model } from 'mongoose';
 import { CreateUserDto } from '../../interfaces/api/dto/create-user.dto';
 import { UpdateUserDto } from '../../interfaces/api/dto/update-user.dto';
-import { BaseReadRepository } from 'src/shared/infrastructure/repository/base.read.repository';
-import { PaginateResponseDto } from 'src/shared/interfaces/paginate-response.dto';
-import { SearchCriteriaDto } from 'src/shared/interfaces/search-criteria.dto';
+import { BaseReadRepository } from '@shared/infrastructure/repository/base.read.repository';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
+import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class UserReadRepository

@@ -2,10 +2,10 @@ module.exports = (
   entityNameLowerCase,
   entityNameCamelCase,
 ) => `import { Injectable } from '@nestjs/common';
-import { RabbitMQService } from 'src/shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
-import { DeclarationExchanges } from 'src/shared/infrastructure/messaging/rabbitmq/declaration-exchanges';
-import { appEvents } from 'src/shared/infrastructure/messaging/event-emitter';
-import { DeclarationQueues } from 'src/shared/infrastructure/messaging/rabbitmq/declaration-queues';
+import { RabbitMQService } from '@shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
+import { DeclarationExchanges } from '@shared/infrastructure/messaging/rabbitmq/declaration-exchanges';
+import { appEvents } from '@shared/infrastructure/messaging/event-emitter';
+import { DeclarationQueues } from '@shared/infrastructure/messaging/rabbitmq/declaration-queues';
 import { ${entityNameCamelCase} } from '../../domain/entity/${entityNameLowerCase}.entity';
 import { ${entityNameCamelCase}Read } from '../../domain/entity/${entityNameLowerCase}.read';
 import { ${entityNameCamelCase}CreatedConsumer } from '../consumers/${entityNameLowerCase}Created.consumer';

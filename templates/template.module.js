@@ -4,7 +4,7 @@ module.exports = (
 ) => `import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RabbitmqModule } from 'src/shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
+import { RabbitmqModule } from '@shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
 import { ${entityNameCamelCase}CreatedConsumer } from './application/consumers/${entityNameLowerCase}Created.consumer';
 import { ${entityNameCamelCase}CreatedPublisher } from './application/publishers/${entityNameLowerCase}Created.publisher';
 import { ${entityNameCamelCase} } from './domain/entity/${entityNameLowerCase}.entity';
