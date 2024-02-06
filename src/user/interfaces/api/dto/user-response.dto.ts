@@ -41,12 +41,12 @@ export class UserResponseDto {
   @ApiProperty()
   @Expose()
   @Type(() => Date)
-  createdAt: Date;
+  created_at: Date;
 
   @ApiProperty()
   @Expose()
   @Type(() => Date)
-  updatedAt: Date;
+  updated_at: Date;
 
   constructor(partial: Partial<UserResponseDto>) {
     Object.assign(this, partial);

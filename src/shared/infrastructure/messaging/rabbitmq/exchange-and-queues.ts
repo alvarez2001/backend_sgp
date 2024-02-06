@@ -7,6 +7,9 @@ export const ExchangesAndQueues: {
   [DeclarationExchanges.user_exchange]: [
     DeclarationQueues.user_created,
     DeclarationQueues.user_updated,
-    DeclarationQueues.user_deleted,
+  ],
+  [DeclarationExchanges.authentication_exchange]: [
+    DeclarationQueues.authentication_created,
+    DeclarationQueues.authentication_updated,
   ],
 };

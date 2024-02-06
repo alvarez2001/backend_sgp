@@ -11,4 +11,6 @@ export interface UserRepositoryInterface {
   findAll(): Promise<User[]>;
 
   delete(id: number): Promise<void>;
+
+  findByUsername(username: string): Promise<User | null>;
 }

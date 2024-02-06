@@ -19,7 +19,7 @@ import { UserUpdatedPublisher } from './application/publishers/userUpdated.publi
 
 @Module({
   controllers: [UserController],
-  exports: [],
+  exports: [UserService],
   imports: [
     RabbitmqModule,
     TypeOrmModule.forFeature([User]),

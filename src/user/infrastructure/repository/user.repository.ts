@@ -31,4 +31,8 @@ export class UserRepository implements UserRepositoryInterface {
   async delete(id: number): Promise<void> {
     await this.userRepository.delete(id);
   }
+
+  async findByUsername(username: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { username } });
+  }
 }

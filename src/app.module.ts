@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { RabbitmqModule } from './shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
+import { RabbitmqModule } from '@shared/infrastructure/messaging/rabbitmq/rabbitmq.module';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -42,8 +45,14 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
 
     UserModule,
+    AuthenticationModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
