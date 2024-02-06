@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import {
   USER_REPOSITORY_INTERFACE,
   UserRepositoryInterface,
@@ -9,6 +9,10 @@ import { UpdateUserDto } from '../interfaces/api/dto/update-user.dto';
 import { UserResponseDto } from '../interfaces/api/dto/user-response.dto';
 import { plainToClass } from 'class-transformer';
 import * as bcryptjs from 'bcryptjs';
+import {
+  USER_READ_REPOSITORY_INTERFACE,
+  UserReadRepositoryInterface,
+} from '../domain/interfaces/userReadRepository.interface';
 
 @Injectable()
 export class UserService {
@@ -18,6 +22,13 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserResponseDto> {
+    const existUser = await this.findByUsername(createUserDto.username);
+    if (existUser)
+      throw new BadRequestException({
+        message: 'El usuario ya existe',
+        statusCode: 400,
+      });
+
     const user = new User();
     Object.assign(user, createUserDto);
 

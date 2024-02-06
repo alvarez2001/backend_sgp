@@ -11,32 +11,26 @@ export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar', length: 120 })
+  @Column()
   name: string;
 
-  @Column({ type: 'varchar', length: 120 })
+  @Column()
   lastName: string;
 
-  @Column({ type: 'char', length: 1 })
+  @Column()
   nationality: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column()
   identification: string;
 
-  @Column({ type: 'varchar', length: 130 })
+  @Column()
   email: string;
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ unique: true })
   username: string;
 
-  @Column({ type: 'varchar', length: 190 })
+  @Column()
   password: string;
-
-  @Column({ type: 'integer' })
-  type: number;
-
-  @Column({ type: 'integer' })
-  status: number;
 
   @CreateDateColumn()
   created_at: Date;

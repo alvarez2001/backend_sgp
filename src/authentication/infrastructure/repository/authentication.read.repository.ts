@@ -55,4 +55,8 @@ export class AuthenticationReadRepository
   async delete(id: number): Promise<void> {
     await this.authenticationReadModel.deleteOne({ id });
   }
+
+  async findByToken(token: string): Promise<AuthenticationRead> {
+    return await this.authenticationReadModel.findOne({ token }).exec();
+  }
 }

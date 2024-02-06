@@ -32,14 +32,6 @@ export class UserResponseDto {
 
   @ApiProperty()
   @Expose()
-  type: number;
-
-  @ApiProperty()
-  @Expose()
-  status: number;
-
-  @ApiProperty()
-  @Expose()
   @Type(() => Date)
   created_at: Date;
 

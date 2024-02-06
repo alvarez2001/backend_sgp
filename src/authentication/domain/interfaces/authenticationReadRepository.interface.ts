@@ -24,4 +24,5 @@ export interface AuthenticationReadRepositoryInterface {
   ): Promise<PaginateResponseDto<AuthenticationRead>>;
 
   delete(id: number): Promise<void>;
+  findByToken(token: string): Promise<AuthenticationRead>;
 }

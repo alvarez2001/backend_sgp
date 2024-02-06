@@ -60,12 +60,4 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  @ApiProperty({ enum: UserType })
-  @IsEnum(UserType)
-  type: UserType;
-
-  @ApiProperty({ enum: UserStatus })
-  @IsEnum(UserStatus)
-  status: UserStatus;
 }

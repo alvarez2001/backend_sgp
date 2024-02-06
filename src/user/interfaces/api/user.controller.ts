@@ -15,6 +15,7 @@ import { UserResponseDto } from './dto/user-response.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UserReadService } from '../../application/user.read.service';
 import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
+import { Public } from '@shared/infrastructure/decorators/public.decorator';
 
 @ApiTags('users')
 @Controller('users')
@@ -25,6 +26,7 @@ export class UserController {
   ) {}
 
   @Post()
+  @Public()
   async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
     return this.userService.createUser(createUserDto);
   }

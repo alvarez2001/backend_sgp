@@ -30,12 +30,6 @@ export class UserRead {
   password: string;
 
   @Prop()
-  type: number;
-
-  @Prop()
-  status: number;
-
-  @Prop()
   created_at: Date;
 
   @Prop()

@@ -84,4 +84,11 @@ export class AuthenticationReadService {
   async deleteAuthentication(id: number): Promise<void> {
     return this.authenticationRepository.delete(id);
   }
+
+  async verifyExistToken(token: string): Promise<AuthenticationResponseDto> {
+    const existToken = await this.authenticationRepository.findByToken(token);
+    return plainToClass(AuthenticationResponseDto, existToken, {
+      excludeExtraneousValues: true,
+    });
+  }
 }
