@@ -2,18 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsInt, IsString } from 'class-validator';
 
 export class CreateAuthenticationDto {
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  token: string;
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    public token: string;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  expire_in: string;
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    public expire_in: string;
 
-  @ApiProperty()
-  @IsInt()
-  @IsNotEmpty()
-  userId: number;
+    @ApiProperty()
+    @IsInt()
+    @IsNotEmpty()
+    public userId: number;
 }

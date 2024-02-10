@@ -6,24 +6,23 @@ export type AuthenticationReadDocument = HydratedDocument<AuthenticationRead>;
 
 @Schema({ collection: 'authentications' })
 export class AuthenticationRead {
-  @Prop()
-  id: number;
+    @Prop()
+    public id: number;
 
-  @Prop()
-  token: string;
+    @Prop()
+    public token: string;
 
-  @Prop()
-  expire_in: string;
+    @Prop()
+    public expire_in: string;
 
-  @Prop({ type: UserRead })
-  user: UserRead;
+    @Prop({ type: UserRead })
+    public user: UserRead;
 
-  @Prop()
-  created_at: Date;
+    @Prop()
+    public created_at: Date;
 
-  @Prop()
-  updated_at: Date;
+    @Prop()
+    public updated_at: Date;
 }
 
-export const AuthenticationReadSchema =
-  SchemaFactory.createForClass(AuthenticationRead);
+export const AuthenticationReadSchema = SchemaFactory.createForClass(AuthenticationRead);

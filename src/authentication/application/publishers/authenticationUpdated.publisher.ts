@@ -9,30 +9,26 @@ import { AuthenticationUpdatedConsumer } from '../consumers/authenticationUpdate
 
 @Injectable()
 export class AuthenticationUpdatedPublisher {
-  constructor(private readonly rabbitMQService: RabbitMQService) {
-    appEvents.on(
-      DeclarationQueues.authentication_updated,
-      async (authentication) => {
-        await this.send(authentication);
-      },
-    );
-  }
+    constructor(private readonly rabbitMQService: RabbitMQService) {
+        appEvents.on(DeclarationQueues.authentication_updated, async authentication => {
+            await this.send(authentication);
+        });
+    }
 
-  async send(data: any) {
-    const model: any = {
-      data,
-      writeModel: Authentication.name,
-      readModel: AuthenticationRead.name,
-      exchange: DeclarationExchanges.authentication_exchange,
-      displayNames: {
-        [DeclarationQueues.authentication_updated]:
-          AuthenticationUpdatedConsumer.name,
-      },
-    };
-    await this.rabbitMQService.publishToExchange(
-      DeclarationExchanges.authentication_exchange,
-      JSON.stringify(model),
-      { persistent: true },
-    );
-  }
+    async send(data: Authentication): Promise<void> {
+        const model = {
+            data,
+            writeModel: Authentication.name,
+            readModel: AuthenticationRead.name,
+            exchange: DeclarationExchanges.authentication_exchange,
+            displayNames: {
+                [DeclarationQueues.authentication_updated]: AuthenticationUpdatedConsumer.name,
+            },
+        };
+        await this.rabbitMQService.publishToExchange(
+            DeclarationExchanges.authentication_exchange,
+            JSON.stringify(model),
+            { persistent: true },
+        );
+    }
 }

@@ -11,40 +11,38 @@ import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class UserReadRepository
-  extends BaseReadRepository<UserRead>
-  implements UserReadRepositoryInterface
+    extends BaseReadRepository<UserRead>
+    implements UserReadRepositoryInterface
 {
-  constructor(
-    @InjectModel(UserRead.name)
-    private readonly userReadModel: Model<UserReadDocument>,
-  ) {
-    super();
-  }
+    constructor(
+        @InjectModel(UserRead.name)
+        private readonly userReadModel: Model<UserReadDocument>,
+    ) {
+        super();
+    }
 
-  async create(user: CreateUserDto): Promise<UserRead> {
-    return this.userReadModel.create(user);
-  }
+    async create(user: CreateUserDto): Promise<UserRead> {
+        return this.userReadModel.create(user);
+    }
 
-  async findById(id: number): Promise<UserRead | null> {
-    return this.userReadModel.findOne({ id }).exec();
-  }
+    async findById(id: number): Promise<UserRead | null> {
+        return this.userReadModel.findOne({ id }).exec();
+    }
 
-  async findAll(): Promise<UserRead[]> {
-    return this.userReadModel.find().exec();
-  }
+    async findAll(): Promise<UserRead[]> {
+        return this.userReadModel.find().exec();
+    }
 
-  async pagination(
-    criteria: SearchCriteriaDto,
-  ): Promise<PaginateResponseDto<UserRead>> {
-    return this.findByCriteria(this.userReadModel, criteria);
-  }
+    async pagination(criteria: SearchCriteriaDto): Promise<PaginateResponseDto<UserRead>> {
+        return this.findByCriteria(this.userReadModel, criteria);
+    }
 
-  async update(id: number, user: UpdateUserDto): Promise<UserRead> {
-    await this.userReadModel.updateOne({ id }, user).exec();
-    return this.findById(id);
-  }
+    async update(id: number, user: UpdateUserDto): Promise<UserRead> {
+        await this.userReadModel.updateOne({ id }, user).exec();
+        return this.findById(id);
+    }
 
-  async delete(id: number): Promise<void> {
-    await this.userReadModel.deleteOne({ id });
-  }
+    async delete(id: number): Promise<void> {
+        await this.userReadModel.deleteOne({ id });
+    }
 }

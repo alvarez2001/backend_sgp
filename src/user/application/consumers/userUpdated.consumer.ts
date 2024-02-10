@@ -6,36 +6,36 @@ import { UserReadService } from '../user.read.service';
 
 @Injectable()
 export class UserUpdatedConsumer implements OnModuleInit {
-  constructor(
-    private readonly rabbitMQService: RabbitMQService,
-    private readonly userService: UserReadService,
-  ) {}
+    constructor(
+        private readonly rabbitMQService: RabbitMQService,
+        private readonly userService: UserReadService,
+    ) {}
 
-  async onModuleInit() {
-    await this.rabbitMQService.consume(
-      DeclarationQueues.user_updated,
-      this.handleMessage.bind(this),
-    );
-  }
-
-  private async handleMessage(msg: ConsumeMessage | null) {
-    if (msg) {
-      try {
-        const data = JSON.parse(JSON.parse(msg.content.toString()));
-
-        if (
-          data.displayNames.hasOwnProperty(DeclarationQueues.user_updated) &&
-          data.displayNames[DeclarationQueues.user_updated] ==
-            UserUpdatedConsumer.name
-        ) {
-          await this.userService.updateUser(data.data.id, data.data);
-        }
-
-        this.rabbitMQService.ack(msg);
-      } catch (error) {
-        console.error('Error procesando el mensaje:', error);
-        this.rabbitMQService.nack(msg);
-      }
+    async onModuleInit(): Promise<void> {
+        await this.rabbitMQService.consume(
+            DeclarationQueues.user_updated,
+            this.handleMessage.bind(this),
+        );
     }
-  }
+
+    private async handleMessage(msg: ConsumeMessage): Promise<void> {
+        try {
+            const data = JSON.parse(JSON.parse(msg?.content?.toString()));
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    data.displayNames,
+                    DeclarationQueues.user_updated,
+                ) &&
+                data.displayNames[DeclarationQueues.user_updated] === UserUpdatedConsumer.name
+            ) {
+                await this.userService.updateUser(data.data.id, data.data);
+            }
+
+            this.rabbitMQService.ack(msg);
+        } catch (error) {
+            console.error('Error procesando el mensaje:', error);
+            this.rabbitMQService.nack(msg);
+        }
+    }
 }

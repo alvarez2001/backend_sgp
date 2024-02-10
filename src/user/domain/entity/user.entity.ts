@@ -1,40 +1,40 @@
 import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+    @PrimaryGeneratedColumn('increment')
+    public id: number;
 
-  @Column()
-  name: string;
+    @Column()
+    public name: string;
 
-  @Column()
-  lastName: string;
+    @Column()
+    public lastName: string;
 
-  @Column()
-  nationality: string;
+    @Column()
+    public nationality: string;
 
-  @Column()
-  identification: string;
+    @Column()
+    public identification: string;
 
-  @Column()
-  email: string;
+    @Column()
+    public email: string;
 
-  @Column({ unique: true })
-  username: string;
+    @Column({ unique: true })
+    public username: string;
 
-  @Column()
-  password: string;
+    @Column()
+    public password: string;
 
-  @CreateDateColumn()
-  created_at: Date;
+    @CreateDateColumn()
+    public created_at: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+    @UpdateDateColumn()
+    public updated_at: Date;
 }

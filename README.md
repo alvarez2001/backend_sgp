@@ -1,47 +1,45 @@
-# SISTEMA GESTION DE PROYECTO
+# PROJECT MANAGEMENT SYSTEM
 
+## Initial Setup
 
+To start working with this project, you should set up the development environment by following these steps:
 
-## Configuración Inicial
+### Setting Up Environment Variables
 
-Para comenzar a trabajar con este proyecto, debes configurar el entorno de desarrollo siguiendo estos pasos:
-
-### Configurar Variables de Entorno
-
-1. Copia el archivo `.env.example` incluido en este repositorio:
+1. Copy the `.env.example` file included in this repository:
 
    ```bash
    cp .env.example .env
    ```
 
-2. Edita el archivo `.env` con tus propias credenciales de prueba y configuraciones. Este archivo contendrá todas las configuraciones necesarias para el proyecto, incluyendo credenciales de bases de datos, puertos, y cualquier otra variable de entorno requerida.
+2. Edit the `.env` file with your own test credentials and settings. This file will contain all the necessary configurations for the project, including database credentials, ports, and any other required environment variables.
 
-   Asegúrate de revisar y, si es necesario, cambiar las claves de passwords, usuarios de base de datos, y cualquier otra configuración sensible antes de proceder.
+   Be sure to review and, if necessary, change the database user passwords, users, and any other sensitive settings before proceeding.
 
-### Levantar el Proyecto con Docker
+### Launching the Project with Docker
 
-Una vez configurado el archivo `.env`, puedes levantar el proyecto utilizando Docker Compose. Este paso construirá y levantará todos los contenedores necesarios para el proyecto:
-
+Once the `.env` file is set up, you can bring up the project using Docker Compose. This step will build and raise all the necessary containers for the project:
 ```bash
 docker compose up --build -d
 ```
 
-Este comando construirá las imágenes si es la primera vez que se levanta el proyecto, o si se han realizado cambios en las dependencias, y luego iniciará los contenedores en modo detached.
+This command will build the images if it's the first time the project is being brought up, or if there have been changes in the dependencies, and then it will start the containers in detached mode.
 
-### Bajar el Proyecto con Docker
+### Bringing Down the Project with Docker
 
-Para detener y remover todos los contenedores creados por el comando `up`, puedes utilizar:
+To stop and remove all the containers created by the `up` command, you can use:
 
 ```bash
 docker compose down
 ```
 
-Este comando detiene y remueve los contenedores, redes, y la configuración predeterminada de volumen asociada con tu composición de Docker.
+This command stops and removes the containers, networks, and the default volume configuration associated with your Docker composition.
 
-## Documentación de la API
+## API Documentation
 
-Para ver la documentación de las APIs y probar los endpoints disponibles, visita la siguiente URL después de levantar el proyecto:
+To view the documentation of the APIs and test the available endpoints, visit the following URL after bringing up the project:
 
 [http://localhost:3000/swagger-documentation](http://localhost:3000/swagger-documentation)
 
-La documentación de Swagger te proporcionará una interfaz interactiva para probar los endpoints, ver los parámetros esperados, y revisar los posibles códigos de respuesta.
+The Swagger documentation will provide you with an interactive interface to test the endpoints, view the expected parameters, and review the possible response codes.
+

@@ -7,17 +7,15 @@ import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 export const USER_READ_REPOSITORY_INTERFACE = 'UserReadRepositoryInterface';
 
 export interface UserReadRepositoryInterface {
-  create(user: CreateUserDto): Promise<UserRead>;
+    create(user: CreateUserDto): Promise<UserRead>;
 
-  update(id: number, user: UpdateUserDto): Promise<UserRead>;
+    update(id: number, user: UpdateUserDto): Promise<UserRead>;
 
-  findById(id: number): Promise<UserRead | null>;
+    findById(id: number): Promise<UserRead | null>;
 
-  findAll(): Promise<UserRead[]>;
+    findAll(): Promise<UserRead[]>;
 
-  pagination(
-    criteria: SearchCriteriaDto,
-  ): Promise<PaginateResponseDto<UserRead>>;
+    pagination(criteria: SearchCriteriaDto): Promise<PaginateResponseDto<UserRead>>;
 
-  delete(id: number): Promise<void>;
+    delete(id: number): Promise<void>;
 }

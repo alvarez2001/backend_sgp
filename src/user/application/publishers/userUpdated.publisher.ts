@@ -9,26 +9,26 @@ import { UserUpdatedConsumer } from '../consumers/userUpdated.consumer';
 
 @Injectable()
 export class UserUpdatedPublisher {
-  constructor(private readonly rabbitMQService: RabbitMQService) {
-    appEvents.on(DeclarationQueues.user_updated, async (user) => {
-      await this.send(user);
-    });
-  }
+    constructor(private readonly rabbitMQService: RabbitMQService) {
+        appEvents.on(DeclarationQueues.user_updated, async user => {
+            await this.send(user);
+        });
+    }
 
-  async send(data: any) {
-    const model: any = {
-      data,
-      writeModel: User.name,
-      readModel: UserRead.name,
-      exchange: DeclarationExchanges.user_exchange,
-      displayNames: {
-        [DeclarationQueues.user_updated]: UserUpdatedConsumer.name,
-      },
-    };
-    await this.rabbitMQService.publishToExchange(
-      DeclarationExchanges.user_exchange,
-      JSON.stringify(model),
-      { persistent: true },
-    );
-  }
+    async send(data: User): Promise<void> {
+        const model = {
+            data,
+            writeModel: User.name,
+            readModel: UserRead.name,
+            exchange: DeclarationExchanges.user_exchange,
+            displayNames: {
+                [DeclarationQueues.user_updated]: UserUpdatedConsumer.name,
+            },
+        };
+        await this.rabbitMQService.publishToExchange(
+            DeclarationExchanges.user_exchange,
+            JSON.stringify(model),
+            { persistent: true },
+        );
+    }
 }

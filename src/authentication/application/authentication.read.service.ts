@@ -4,8 +4,8 @@ import { UpdateAuthenticationDto } from '../interfaces/api/dto/update-authentica
 import { AuthenticationResponseDto } from '../interfaces/api/dto/authentication-response.dto';
 import { plainToClass } from 'class-transformer';
 import {
-  AUTHENTICATION_READ_REPOSITORY_INTERFACE,
-  AuthenticationReadRepositoryInterface,
+    AUTHENTICATION_READ_REPOSITORY_INTERFACE,
+    AuthenticationReadRepositoryInterface,
 } from '../domain/interfaces/authenticationReadRepository.interface';
 import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 import { AuthenticationRead } from '../domain/entity/authentication.read';
@@ -13,82 +13,83 @@ import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 
 @Injectable()
 export class AuthenticationReadService {
-  constructor(
-    @Inject(AUTHENTICATION_READ_REPOSITORY_INTERFACE)
-    private authenticationRepository: AuthenticationReadRepositoryInterface,
-  ) {}
+    constructor(
+        @Inject(AUTHENTICATION_READ_REPOSITORY_INTERFACE)
+        private authenticationRepository: AuthenticationReadRepositoryInterface,
+    ) {}
 
-  async createAuthentication(
-    createAuthenticationDto: CreateAuthenticationDto,
-  ): Promise<AuthenticationResponseDto> {
-    const authentication = await this.authenticationRepository.create(
-      createAuthenticationDto,
-    );
-    return plainToClass(AuthenticationResponseDto, authentication, {
-      excludeExtraneousValues: true,
-    });
-  }
-
-  async updateAuthentication(
-    id: number,
-    updateAuthenticationDto: UpdateAuthenticationDto,
-  ): Promise<AuthenticationResponseDto> {
-    const authentication = await this.authenticationRepository.findById(id);
-    if (!authentication) {
-      throw new Error('Authentication not found');
+    async createAuthentication(
+        createAuthenticationDto: CreateAuthenticationDto,
+    ): Promise<AuthenticationResponseDto> {
+        const authentication = await this.authenticationRepository.create(createAuthenticationDto);
+        return plainToClass(AuthenticationResponseDto, authentication, {
+            excludeExtraneousValues: true,
+        });
     }
 
-    const authenticationUpdated = await this.authenticationRepository.update(
-      id,
-      updateAuthenticationDto,
-    );
-    return plainToClass(AuthenticationResponseDto, authenticationUpdated, {
-      excludeExtraneousValues: true,
-    });
-  }
+    async updateAuthentication(
+        id: number,
+        updateAuthenticationDto: UpdateAuthenticationDto,
+    ): Promise<AuthenticationResponseDto> {
+        const authentication = await this.authenticationRepository.findById(id);
+        if (!authentication) {
+            throw new Error('Authentication not found');
+        }
 
-  async findAuthenticationById(id: number): Promise<AuthenticationResponseDto> {
-    const authentication = await this.authenticationRepository.findById(id);
-
-    return plainToClass(AuthenticationResponseDto, authentication, {
-      excludeExtraneousValues: true,
-    });
-  }
-
-  async findAllAuthentications(): Promise<AuthenticationResponseDto[]> {
-    const authentications = await this.authenticationRepository.findAll();
-    return authentications.map((authentication) =>
-      plainToClass(AuthenticationResponseDto, authentication, {
-        excludeExtraneousValues: true,
-      }),
-    );
-  }
-
-  async paginationAuthentications(
-    criteria: SearchCriteriaDto,
-  ): Promise<PaginateResponseDto<AuthenticationResponseDto>> {
-    const pagination: PaginateResponseDto<any> =
-      await this.authenticationRepository.pagination(criteria);
-
-    pagination.data = pagination.data.map(
-      (authentication: AuthenticationRead) => {
-        return plainToClass(AuthenticationResponseDto, authentication, {
-          excludeExtraneousValues: true,
+        const authenticationUpdated = await this.authenticationRepository.update(
+            id,
+            updateAuthenticationDto,
+        );
+        return plainToClass(AuthenticationResponseDto, authenticationUpdated, {
+            excludeExtraneousValues: true,
         });
-      },
-    );
+    }
 
-    return pagination;
-  }
+    async findAuthenticationById(id: number): Promise<AuthenticationResponseDto> {
+        const authentication = await this.authenticationRepository.findById(id);
 
-  async deleteAuthentication(id: number): Promise<void> {
-    return this.authenticationRepository.delete(id);
-  }
+        return plainToClass(AuthenticationResponseDto, authentication, {
+            excludeExtraneousValues: true,
+        });
+    }
 
-  async verifyExistToken(token: string): Promise<AuthenticationResponseDto> {
-    const existToken = await this.authenticationRepository.findByToken(token);
-    return plainToClass(AuthenticationResponseDto, existToken, {
-      excludeExtraneousValues: true,
-    });
-  }
+    async findAllAuthentications(): Promise<AuthenticationResponseDto[]> {
+        const authentications = await this.authenticationRepository.findAll();
+        return authentications.map(authentication =>
+            plainToClass(AuthenticationResponseDto, authentication, {
+                excludeExtraneousValues: true,
+            }),
+        );
+    }
+
+    async paginationAuthentications(
+        criteria: SearchCriteriaDto,
+    ): Promise<PaginateResponseDto<AuthenticationResponseDto>> {
+        const pagination: PaginateResponseDto<AuthenticationRead> =
+            await this.authenticationRepository.pagination(criteria);
+
+        const paginationResponse: PaginateResponseDto<AuthenticationResponseDto> = {
+            ...pagination,
+            data: [],
+        };
+
+        paginationResponse.data = pagination.data.map((authentication: AuthenticationRead) => {
+            return plainToClass(AuthenticationResponseDto, authentication, {
+                excludeExtraneousValues: true,
+            });
+        });
+
+        return paginationResponse;
+    }
+
+    async deleteAuthentication(id: number): Promise<void> {
+        return this.authenticationRepository.delete(id);
+    }
+
+    async verifyExistToken(token: string): Promise<AuthenticationResponseDto> {
+        const existToken = await this.authenticationRepository.findByToken(token);
+        return plainToClass(AuthenticationResponseDto, existToken, {
+            excludeExtraneousValues: true,
+        });
+    }
 }

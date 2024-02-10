@@ -2,45 +2,45 @@ import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserResponseDto {
-  @ApiProperty()
-  @Expose()
-  id: number;
+    @ApiProperty()
+    @Expose()
+    public id: number;
 
-  @ApiProperty()
-  @Expose()
-  name: string;
+    @ApiProperty()
+    @Expose()
+    public name: string;
 
-  @ApiProperty()
-  @Expose()
-  lastName: string;
+    @ApiProperty()
+    @Expose()
+    public lastName: string;
 
-  @ApiProperty()
-  @Expose()
-  nationality: string;
+    @ApiProperty()
+    @Expose()
+    public nationality: string;
 
-  @ApiProperty()
-  @Expose()
-  identification: string;
+    @ApiProperty()
+    @Expose()
+    public identification: string;
 
-  @ApiProperty()
-  @Expose()
-  email: string;
+    @ApiProperty()
+    @Expose()
+    public email: string;
 
-  @ApiProperty()
-  @Expose()
-  username: string;
+    @ApiProperty()
+    @Expose()
+    public username: string;
 
-  @ApiProperty()
-  @Expose()
-  @Type(() => Date)
-  created_at: Date;
+    @ApiProperty()
+    @Expose()
+    @Type(() => Date)
+    public created_at: Date;
 
-  @ApiProperty()
-  @Expose()
-  @Type(() => Date)
-  updated_at: Date;
+    @ApiProperty()
+    @Expose()
+    @Type(() => Date)
+    public updated_at: Date;
 
-  constructor(partial: Partial<UserResponseDto>) {
-    Object.assign(this, partial);
-  }
+    constructor(partial: Partial<UserResponseDto>) {
+        Object.assign(this, partial);
+    }
 }

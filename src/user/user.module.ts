@@ -18,31 +18,29 @@ import { UserUpdatedConsumer } from './application/consumers/userUpdated.consume
 import { UserUpdatedPublisher } from './application/publishers/userUpdated.publisher';
 
 @Module({
-  controllers: [UserController],
-  exports: [UserService],
-  imports: [
-    RabbitmqModule,
-    TypeOrmModule.forFeature([User]),
-    MongooseModule.forFeature([
-      { name: UserRead.name, schema: UserReadSchema },
-    ]),
-  ],
-  providers: [
-    {
-      provide: USER_REPOSITORY_INTERFACE,
-      useClass: UserRepository,
-    },
-    {
-      provide: USER_READ_REPOSITORY_INTERFACE,
-      useClass: UserReadRepository,
-    },
-    UserCreatedConsumer,
-    UserCreatedPublisher,
-    UserUpdatedConsumer,
-    UserUpdatedPublisher,
-    UserService,
-    UserReadService,
-    UserSubscriber,
-  ],
+    controllers: [UserController],
+    exports: [UserService],
+    imports: [
+        RabbitmqModule,
+        TypeOrmModule.forFeature([User]),
+        MongooseModule.forFeature([{ name: UserRead.name, schema: UserReadSchema }]),
+    ],
+    providers: [
+        {
+            provide: USER_REPOSITORY_INTERFACE,
+            useClass: UserRepository,
+        },
+        {
+            provide: USER_READ_REPOSITORY_INTERFACE,
+            useClass: UserReadRepository,
+        },
+        UserCreatedConsumer,
+        UserCreatedPublisher,
+        UserUpdatedConsumer,
+        UserUpdatedPublisher,
+        UserService,
+        UserReadService,
+        UserSubscriber,
+    ],
 })
 export class UserModule {}

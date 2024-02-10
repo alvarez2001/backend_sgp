@@ -5,35 +5,35 @@ export type UserReadDocument = HydratedDocument<UserRead>;
 
 @Schema({ collection: 'users' })
 export class UserRead {
-  @Prop()
-  id: number;
+    @Prop()
+    public id: number;
 
-  @Prop()
-  name: string;
+    @Prop()
+    public name: string;
 
-  @Prop()
-  lastName: string;
+    @Prop()
+    public lastName: string;
 
-  @Prop()
-  nationality: string;
+    @Prop()
+    public nationality: string;
 
-  @Prop()
-  identification: string;
+    @Prop()
+    public identification: string;
 
-  @Prop()
-  email: string;
+    @Prop()
+    public email: string;
 
-  @Prop()
-  username: string;
+    @Prop()
+    public username: string;
 
-  @Prop()
-  password: string;
+    @Prop()
+    public password: string;
 
-  @Prop()
-  created_at: Date;
+    @Prop()
+    public created_at: Date;
 
-  @Prop()
-  updated_at: Date;
+    @Prop()
+    public updated_at: Date;
 }
 
 export const UserReadSchema = SchemaFactory.createForClass(UserRead);

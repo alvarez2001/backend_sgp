@@ -6,29 +6,32 @@ import { AuthenticationReadService } from '../../application/authentication.read
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private configService: ConfigService,
-    private authenticationService: AuthenticationReadService,
-  ) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: configService.get('SECRET_KEY_JWT'),
-      passReqToCallback: true,
-    });
-  }
-
-  async validate(req: Request, payload: any) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (!token) {
-      throw new UnauthorizedException('Token no proporcionado');
+    constructor(
+        configService: ConfigService,
+        private authenticationService: AuthenticationReadService,
+    ) {
+        super({
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: false,
+            secretOrKey: configService.get('JWT_SECRET_KEY'),
+            passReqToCallback: true,
+        });
     }
 
-    const isValid = await this.authenticationService.verifyExistToken(token);
-    if (!isValid) {
-      throw new UnauthorizedException('Token no válido o expirado');
+    async validate(
+        req: Request,
+        payload: { sub: number; username: string },
+    ): Promise<{ id: number; username: string }> {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+            throw new UnauthorizedException('Token no proporcionado');
+        }
+
+        const isValid = await this.authenticationService.verifyExistToken(token);
+        if (!isValid) {
+            throw new UnauthorizedException('Token no válido o expirado');
+        }
+        return { id: payload.sub, username: payload.username };
     }
-    return { id: payload.sub, username: payload.username };
-  }
 }

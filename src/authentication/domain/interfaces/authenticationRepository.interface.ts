@@ -1,21 +1,17 @@
 import { Authentication } from '../entity/authentication.entity';
 
-export const AUTHENTICATION_REPOSITORY_INTERFACE =
-  'AuthenticationRepositoryInterface';
+export const AUTHENTICATION_REPOSITORY_INTERFACE = 'AuthenticationRepositoryInterface';
 
 export interface AuthenticationRepositoryInterface {
-  create(authentication: Authentication): Promise<Authentication>;
+    create(authentication: Authentication): Promise<Authentication>;
 
-  update(
-    id: number,
-    authentication: Partial<Authentication>,
-  ): Promise<Authentication>;
+    update(id: number, authentication: Partial<Authentication>): Promise<Authentication>;
 
-  findById(id: number): Promise<Authentication | null>;
+    findById(id: number): Promise<Authentication | null>;
 
-  findAll(): Promise<Authentication[]>;
+    findAll(): Promise<Authentication[]>;
 
-  delete(id: number): Promise<void>;
+    delete(id: number): Promise<void>;
 
-  findByUserId(userId: number): Promise<Authentication | null>;
+    findByUserId(userId: number): Promise<Authentication | null>;
 }

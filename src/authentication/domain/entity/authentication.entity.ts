@@ -1,32 +1,32 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  Column,
-  OneToOne,
-  JoinColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    Column,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
 import { User } from '../../../user/domain/entity/user.entity';
 
 @Entity()
 export class Authentication {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+    @PrimaryGeneratedColumn('increment')
+    public id: number;
 
-  @Column()
-  token: string;
+    @Column()
+    public token: string;
 
-  @Column()
-  expire_in: string;
+    @Column()
+    public expire_in: string;
 
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+    @OneToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    public user: User;
 
-  @CreateDateColumn()
-  created_at: Date;
+    @CreateDateColumn()
+    public created_at: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+    @UpdateDateColumn()
+    public updated_at: Date;
 }
