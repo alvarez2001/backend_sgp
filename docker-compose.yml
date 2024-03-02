@@ -44,25 +44,8 @@ services:
         source: write_pgsql
         target: /var/lib/postgresql/data
 
-  mongo:
-    image: mongo:latest
-    container_name: container_mongo_service
-    ports:
-      - ${READ_DB_PORT}:${READ_DB_PORT}
-    networks:
-      nestjs_network:
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${READ_DB_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${READ_DB_PASSWORD}
-      MONGO_INITDB_DATABASE: ${READ_DB_DATABASE}
-    volumes:
-      - type: volume
-        source: read_mongo
-        target: /data/db
-
 volumes:
   rabbitmq_data:
-  read_mongo:
   write_pgsql:
 
 networks:

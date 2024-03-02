@@ -19,14 +19,14 @@ import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard
             imports: [ConfigModule, EventEmitterModule.forRoot()],
             inject: [ConfigService],
             useFactory: async (configService: ConfigService) => ({
-                type: 'postgres', // asume que usas PostgreSQL
+                type: 'postgres',
                 host: configService.get<string>('WRITE_DB_HOST', 'localhost'),
                 port: configService.get<number>('WRITE_DB_PORT', 5432),
                 username: configService.get<string>('WRITE_DB_USERNAME', 'root'),
                 password: configService.get<string>('WRITE_DB_PASSWORD', 'root'),
                 database: configService.get<string>('WRITE_DB_DATABASE', 'pgsql'),
                 autoLoadEntities: true,
-                synchronize: configService.get<boolean>('WRITE_DB_SYNCHRONIZE', true), // Ten cuidado con esta opción en producción
+                synchronize: configService.get<boolean>('WRITE_DB_SYNCHRONIZE', true),
                 subscribers: ['dist/**/*.subscriber{.ts,.js}'],
             }),
         }),

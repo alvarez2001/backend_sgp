@@ -1,4 +1,4 @@
-import { EntityTarget, Repository, SelectQueryBuilder, getRepository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { SearchCriteriaDto } from '../../interfaces/search-criteria.dto';
 import { PaginateResponseDto } from '../../interfaces/paginate-response.dto';
 
@@ -35,15 +35,11 @@ export abstract class BaseRepository<T> {
     ): void {
         Object.keys(filters).forEach(key => {
             const value = filters[key];
-            // Aquí puedes personalizar cómo aplicar los filtros
-            // Por ejemplo, si es un rango de fechas, números, etc.
-            // Asegúrate de usar parámetros para prevenir inyecciones SQL
             if (key.endsWith('Start')) {
                 queryBuilder.andWhere(`entity.${key} >= :startValue`, { startValue: value });
             } else if (key.endsWith('End')) {
                 queryBuilder.andWhere(`entity.${key} <= :endValue`, { endValue: value });
             } else {
-                // Aquí aplicas los filtros como consideres necesario
                 queryBuilder.andWhere(`entity.${key} LIKE :value`, { value: `%${value}%` });
             }
         });
