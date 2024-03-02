@@ -1,4 +1,7 @@
+import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
 import { User } from '../entity/user.entity';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
+import { UserResponseDto } from 'src/user/interfaces/api/dto/user-response.dto';
 
 export const USER_REPOSITORY_INTERFACE = 'UserRepositoryInterface';
 export interface UserRepositoryInterface {
@@ -13,4 +16,6 @@ export interface UserRepositoryInterface {
     delete(id: number): Promise<void>;
 
     findByUsername(username: string): Promise<User | null>;
+
+    pagination(criteria: SearchCriteriaDto): Promise<PaginateResponseDto<User>>;
 }

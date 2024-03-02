@@ -9,6 +9,8 @@ import { UpdateUserDto } from '../interfaces/api/dto/update-user.dto';
 import { UserResponseDto } from '../interfaces/api/dto/user-response.dto';
 import { plainToClass } from 'class-transformer';
 import * as bcryptjs from 'bcryptjs';
+import { SearchCriteriaDto } from '@shared/interfaces/search-criteria.dto';
+import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 
 @Injectable()
 export class UserService {
@@ -21,7 +23,7 @@ export class UserService {
         const existUser = await this.findByUsername(createUserDto.username);
         if (existUser) {
             throw new BadRequestException({
-                message: 'El usuario ya existe',
+                message: 'User already exists',
                 statusCode: 400,
             });
         }
@@ -79,5 +81,23 @@ export class UserService {
 
     async findByUsername(username: string): Promise<User | null> {
         return await this.userRepository.findByUsername(username);
+    }
+
+    async pagination(criteria: SearchCriteriaDto): Promise<PaginateResponseDto<UserResponseDto>> {
+        const pagination: PaginateResponseDto<User> =
+            await this.userRepository.pagination(criteria);
+
+        const paginationResponse: PaginateResponseDto<UserResponseDto> = {
+            ...pagination,
+            data: [],
+        };
+
+        paginationResponse.data = pagination.data.map((user: User) => {
+            return plainToClass(UserResponseDto, user, {
+                excludeExtraneousValues: true,
+            });
+        });
+
+        return paginationResponse;
     }
 }

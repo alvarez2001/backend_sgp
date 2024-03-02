@@ -24,10 +24,11 @@ export class UserController {
         return this.userService.findUserById(id);
     }
 
-    // @Get()
-    // async pagination(@Query() query: object): Promise<PaginateResponseDto<UserResponseDto>> {
-    //     return this.userService.paginationUsers(query);
-    // }
+    @Get()
+    @ApiBearerAuth()
+    async pagination(@Query() query: object): Promise<PaginateResponseDto<UserResponseDto>> {
+        return this.userService.pagination(query);
+    }
 
     @Get('/data/list')
     @ApiBearerAuth()
