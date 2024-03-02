@@ -111,26 +111,9 @@ writeFile(
     entityNameCamelCase,
   ),
 );
-writeFile(
-  path.join(entityDir, `domain/entity/${entityNameLowerCase}.read.ts`),
-  require('./templates/domain/entity/template.read')(
-    entityNameLowerCase,
-    entityNameCamelCase,
-  ),
-);
 // FIN ENTITIES
 
 // INICIO INTERFACES
-writeFile(
-  path.join(
-    entityDir,
-    `domain/interfaces/${entityNameLowerCase}ReadRepository.interface.ts`,
-  ),
-  require('./templates/domain/interfaces/templateReadRepository.interface')(
-    entityNameLowerCase,
-    entityNameCamelCase,
-  ),
-);
 writeFile(
   path.join(
     entityDir,
@@ -147,16 +130,6 @@ writeFile(
 writeFile(
   path.join(
     entityDir,
-    `infrastructure/repository/${entityNameLowerCase}.read.repository.ts`,
-  ),
-  require('./templates/infrastructure/repository/template.read.repository')(
-    entityNameLowerCase,
-    entityNameCamelCase,
-  ),
-);
-writeFile(
-  path.join(
-    entityDir,
     `infrastructure/repository/${entityNameLowerCase}.repository.ts`,
   ),
   require('./templates/infrastructure/repository/template.repository')(
@@ -167,13 +140,6 @@ writeFile(
 // FIN REPOSITORY
 
 // INICIO SERVICE
-writeFile(
-  path.join(entityDir, `application/${entityNameLowerCase}.read.service.ts`),
-  require('./templates/application/template.read.service')(
-    entityNameLowerCase,
-    entityNameCamelCase,
-  ),
-);
 writeFile(
   path.join(entityDir, `application/${entityNameLowerCase}.service.ts`),
   require('./templates/application/template.service')(
