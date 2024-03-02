@@ -4,7 +4,6 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard';
@@ -31,19 +30,6 @@ import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard
                 subscribers: ['dist/**/*.subscriber{.ts,.js}'],
             }),
         }),
-        MongooseModule.forRootAsync({
-            imports: [ConfigModule],
-            inject: [ConfigService],
-            useFactory: async (configService: ConfigService) => ({
-                uri: `mongodb://${configService.get('READ_DB_HOST')}:${configService.get('READ_DB_PORT')}`,
-                auth: {
-                    username: configService.get('READ_DB_USERNAME'),
-                    password: configService.get('READ_DB_PASSWORD'),
-                },
-                dbName: configService.get('READ_DB_DATABASE'),
-            }),
-        }),
-
         UserModule,
         AuthenticationModule,
     ],

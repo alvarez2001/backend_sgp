@@ -10,10 +10,6 @@ import { AuthenticationController } from './interfaces/api/authentication.contro
 import { AuthenticationService } from './application/authentication.service';
 import { AUTHENTICATION_REPOSITORY_INTERFACE } from './domain/interfaces/authenticationRepository.interface';
 import { AuthenticationSubscriber } from './application/subscriber/authentication.subscriber';
-import { AuthenticationRead, AuthenticationReadSchema } from './domain/entity/authentication.read';
-import { AuthenticationReadRepository } from './infrastructure/repository/authentication.read.repository';
-import { AUTHENTICATION_READ_REPOSITORY_INTERFACE } from './domain/interfaces/authenticationReadRepository.interface';
-import { AuthenticationReadService } from './application/authentication.read.service';
 import { AuthenticationUpdatedConsumer } from './application/consumers/authenticationUpdated.consumer';
 import { AuthenticationUpdatedPublisher } from './application/publishers/authenticationUpdated.publisher';
 import { UserModule } from '../user/user.module';
@@ -28,9 +24,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     imports: [
         RabbitmqModule,
         TypeOrmModule.forFeature([Authentication]),
-        MongooseModule.forFeature([
-            { name: AuthenticationRead.name, schema: AuthenticationReadSchema },
-        ]),
         forwardRef(() => UserModule),
         PassportModule,
         JwtModule.registerAsync({
@@ -49,16 +42,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
             provide: AUTHENTICATION_REPOSITORY_INTERFACE,
             useClass: AuthenticationRepository,
         },
-        {
-            provide: AUTHENTICATION_READ_REPOSITORY_INTERFACE,
-            useClass: AuthenticationReadRepository,
-        },
         AuthenticationCreatedConsumer,
         AuthenticationCreatedPublisher,
         AuthenticationUpdatedConsumer,
         AuthenticationUpdatedPublisher,
         AuthenticationService,
-        AuthenticationReadService,
         AuthenticationSubscriber,
         JwtStrategy,
     ],

@@ -4,7 +4,6 @@ import { DeclarationExchanges } from '@shared/infrastructure/messaging/rabbitmq/
 import { appEvents } from '@shared/infrastructure/messaging/event-emitter';
 import { DeclarationQueues } from '@shared/infrastructure/messaging/rabbitmq/declaration-queues';
 import { User } from '../../domain/entity/user.entity';
-import { UserRead } from '../../domain/entity/user.read';
 import { UserUpdatedConsumer } from '../consumers/userUpdated.consumer';
 
 @Injectable()
@@ -19,7 +18,6 @@ export class UserUpdatedPublisher {
         const model = {
             data,
             writeModel: User.name,
-            readModel: UserRead.name,
             exchange: DeclarationExchanges.user_exchange,
             displayNames: {
                 [DeclarationQueues.user_updated]: UserUpdatedConsumer.name,

@@ -14,4 +14,6 @@ export interface AuthenticationRepositoryInterface {
     delete(id: number): Promise<void>;
 
     findByUserId(userId: number): Promise<Authentication | null>;
+
+    findByToken(token: string): Promise<Authentication>;
 }

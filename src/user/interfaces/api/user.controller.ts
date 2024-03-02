@@ -3,18 +3,14 @@ import { UserService } from '../../application/user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
-import { ApiTags } from '@nestjs/swagger';
-import { UserReadService } from '../../application/user.read.service';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PaginateResponseDto } from '@shared/interfaces/paginate-response.dto';
 import { Public } from '@shared/infrastructure/decorators/public.decorator';
 
 @ApiTags('users')
 @Controller('users')
 export class UserController {
-    constructor(
-        private readonly userService: UserService,
-        private readonly userReadService: UserReadService,
-    ) {}
+    constructor(private readonly userService: UserService) {}
 
     @Post()
     @Public()
@@ -23,21 +19,24 @@ export class UserController {
     }
 
     @Get(':id')
+    @ApiBearerAuth()
     async findOne(@Param('id') id: number): Promise<UserResponseDto> {
-        return this.userReadService.findUserById(id);
+        return this.userService.findUserById(id);
     }
 
-    @Get()
-    async pagination(@Query() query: object): Promise<PaginateResponseDto<UserResponseDto>> {
-        return this.userReadService.paginationUsers(query);
-    }
+    // @Get()
+    // async pagination(@Query() query: object): Promise<PaginateResponseDto<UserResponseDto>> {
+    //     return this.userService.paginationUsers(query);
+    // }
 
     @Get('/data/list')
+    @ApiBearerAuth()
     async findAll(): Promise<UserResponseDto[]> {
-        return this.userReadService.findAllUsers();
+        return this.userService.findAllUsers();
     }
 
     @Put(':id')
+    @ApiBearerAuth()
     async update(
         @Param('id') id: number,
         @Body() updateUserDto: UpdateUserDto,
@@ -46,6 +45,7 @@ export class UserController {
     }
 
     @Delete(':id')
+    @ApiBearerAuth()
     async remove(@Param('id') id: number): Promise<void> {
         return this.userService.deleteUser(id);
     }

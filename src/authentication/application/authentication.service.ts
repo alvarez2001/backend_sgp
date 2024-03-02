@@ -119,4 +119,11 @@ export class AuthenticationService {
             excludeExtraneousValues: true,
         });
     }
+
+    async verifyExistToken(token: string): Promise<AuthenticationResponseDto> {
+        const existToken = await this.authenticationRepository.findByToken(token);
+        return plainToClass(AuthenticationResponseDto, existToken, {
+            excludeExtraneousValues: true,
+        });
+    }
 }

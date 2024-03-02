@@ -42,4 +42,8 @@ export class AuthenticationRepository implements AuthenticationRepositoryInterfa
             where: { user: { id: userId } },
         });
     }
+
+    async findByToken(token: string): Promise<Authentication> {
+        return await this.authenticationRepository.findOne({ where: { token } });
+    }
 }

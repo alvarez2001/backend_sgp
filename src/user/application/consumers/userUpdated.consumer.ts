@@ -2,14 +2,10 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { RabbitMQService } from '@shared/infrastructure/messaging/rabbitmq/rabbitmq.service';
 import { ConsumeMessage } from 'amqplib';
 import { DeclarationQueues } from '@shared/infrastructure/messaging/rabbitmq/declaration-queues';
-import { UserReadService } from '../user.read.service';
 
 @Injectable()
 export class UserUpdatedConsumer implements OnModuleInit {
-    constructor(
-        private readonly rabbitMQService: RabbitMQService,
-        private readonly userService: UserReadService,
-    ) {}
+    constructor(private readonly rabbitMQService: RabbitMQService) {}
 
     async onModuleInit(): Promise<void> {
         await this.rabbitMQService.consume(
@@ -29,7 +25,6 @@ export class UserUpdatedConsumer implements OnModuleInit {
                 ) &&
                 data.displayNames[DeclarationQueues.user_updated] === UserUpdatedConsumer.name
             ) {
-                await this.userService.updateUser(data.data.id, data.data);
             }
 
             this.rabbitMQService.ack(msg);
