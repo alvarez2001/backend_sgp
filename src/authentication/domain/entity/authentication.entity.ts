@@ -14,19 +14,19 @@ export class Authentication {
     @PrimaryGeneratedColumn('increment')
     public id: number;
 
-    @Column()
+    @Column({ name: 'token' })
     public token: string;
 
-    @Column()
-    public expire_in: string;
+    @Column({ name: 'expire_in' })
+    public expireIn: string;
 
     @OneToOne(() => User)
     @JoinColumn({ name: 'user_id' })
     public user: User;
 
-    @CreateDateColumn()
-    public created_at: Date;
+    @CreateDateColumn({ name: 'created_at' })
+    public createdAt: Date;
 
-    @UpdateDateColumn()
-    public updated_at: Date;
+    @UpdateDateColumn({ name: 'updated_at' })
+    public updatedAt: Date;
 }

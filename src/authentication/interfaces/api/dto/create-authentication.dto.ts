@@ -10,7 +10,7 @@ export class CreateAuthenticationDto {
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
-    public expire_in: string;
+    public expireIn: string;
 
     @ApiProperty()
     @IsInt()

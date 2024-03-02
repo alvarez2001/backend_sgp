@@ -11,30 +11,30 @@ export class User {
     @PrimaryGeneratedColumn('increment')
     public id: number;
 
-    @Column()
+    @Column({ name: 'name' })
     public name: string;
 
-    @Column()
+    @Column({ name: 'last_name' })
     public lastName: string;
 
-    @Column()
+    @Column({ name: 'nationality' })
     public nationality: string;
 
-    @Column()
+    @Column({ name: 'identification' })
     public identification: string;
 
-    @Column()
+    @Column({ name: 'email' })
     public email: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, name: 'username' })
     public username: string;
 
-    @Column()
+    @Column({ name: 'password' })
     public password: string;
 
-    @CreateDateColumn()
-    public created_at: Date;
+    @CreateDateColumn({ name: 'created_at' })
+    public createdAt: Date;
 
-    @UpdateDateColumn()
-    public updated_at: Date;
+    @UpdateDateColumn({ name: 'updated_at' })
+    public updatedAt: Date;
 }

@@ -13,7 +13,7 @@ export class AuthenticationResponseDto {
 
     @ApiProperty()
     @Expose()
-    public expire_in: string;
+    public expireIn: string;
 
     @ApiProperty()
     @Expose()
@@ -27,12 +27,12 @@ export class AuthenticationResponseDto {
     @ApiProperty()
     @Type(() => Date)
     @Expose()
-    public created_at: Date;
+    public createdAt: Date;
 
     @ApiProperty()
     @Type(() => Date)
     @Expose()
-    public updated_at: Date;
+    public updatedAt: Date;
 
     constructor(partial: Partial<AuthenticationResponseDto>) {
         Object.assign(this, partial);

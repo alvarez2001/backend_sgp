@@ -99,12 +99,12 @@ export class AuthenticationService {
             authentication = new Authentication();
             authentication.user = user;
             authentication.token = token;
-            authentication.expire_in = expirationDateSeconds.toString();
+            authentication.expireIn = expirationDateSeconds.toString();
             authentication = await this.authenticationRepository.create(authentication);
         } else {
             Object.assign(authentication, {
                 token: token,
-                expire_in: expirationDateSeconds.toString(),
+                expireIn: expirationDateSeconds.toString(),
             });
 
             authentication = await this.authenticationRepository.update(
