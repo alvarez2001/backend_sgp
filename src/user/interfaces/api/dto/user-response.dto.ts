@@ -32,6 +32,10 @@ export class UserResponseDto {
 
     @ApiProperty()
     @Expose()
+    public isActive: boolean;
+
+    @ApiProperty()
+    @Expose()
     @Type(() => Date)
     public createdAt: Date;
 

@@ -28,9 +28,9 @@ services:
     networks:
       - nestjs_network
 
-  postgresql_service:
+  postgresql_service_nest:
     image: postgres:15
-    container_name: container_postgresql_service
+    container_name: container_postgresql_service_nest
     ports:
       - ${WRITE_DB_PORT}:${WRITE_DB_PORT}
     networks:
