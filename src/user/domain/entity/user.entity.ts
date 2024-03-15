@@ -1,4 +1,5 @@
 import { Project } from 'src/project/domain/entity/project.entity';
+import { ProjectExpenseRequest } from 'src/projectexpenserequest/domain/entity/projectexpenserequest.entity';
 import {
     Entity,
     Column,
@@ -40,6 +41,8 @@ export class User {
     @OneToMany(() => Project, (project) => project.user)
     public projects: Project[];
 
+    @OneToMany(() => ProjectExpenseRequest, (projectExpenseRequest) => projectExpenseRequest.user)
+    public projectExpenseRequest: ProjectExpenseRequest[];
 
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: Date;

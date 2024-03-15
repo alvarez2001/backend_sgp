@@ -16,4 +16,8 @@ export const ExchangesAndQueues: {
         DeclarationQueues.project_created,
         DeclarationQueues.project_updated,
     ],
+    [DeclarationExchanges.projectexpenserequest_exchange]: [
+        DeclarationQueues.projectexpenserequest_created,
+        DeclarationQueues.projectexpenserequest_updated,
+    ],
 };

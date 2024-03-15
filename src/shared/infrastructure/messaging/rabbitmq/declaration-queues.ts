@@ -8,4 +8,8 @@ export enum DeclarationQueues {
 
     'project_created' = 'project.created',
     'project_updated' = 'project.updated',
+
+    'projectexpenserequest_created' = 'projectexpenserequest.created',
+    'projectexpenserequest_updated' = 'projectexpenserequest.updated',
+    
 }

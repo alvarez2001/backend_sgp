@@ -1,3 +1,4 @@
+import { ProjectExpenseRequest } from 'src/projectexpenserequest/domain/entity/projectexpenserequest.entity';
 import { User } from 'src/user/domain/entity/user.entity';
 import {
     Entity,
@@ -7,6 +8,7 @@ import {
     Column,
     ManyToOne,
     JoinColumn,
+    OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -44,6 +46,9 @@ export class Project {
     @ManyToOne(() => User, user => user.projects)
     @JoinColumn({ name: 'user_id' })
     user: User;
+
+    @OneToMany(() => ProjectExpenseRequest, (projectExpenseRequest) => projectExpenseRequest.project)
+    projectExpenseRequest: ProjectExpenseRequest[];
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;

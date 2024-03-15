@@ -8,6 +8,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard';
 import { ProjectModule } from './project/project.module';
+import { ProjectExpenseRequestModule } from './projectexpenserequest/projectexpenserequest.module';
 
 @Module({
     imports: [
@@ -34,6 +35,7 @@ import { ProjectModule } from './project/project.module';
         UserModule,
         AuthenticationModule,
         ProjectModule,
+        ProjectExpenseRequestModule,
     ],
     controllers: [],
     providers: [
