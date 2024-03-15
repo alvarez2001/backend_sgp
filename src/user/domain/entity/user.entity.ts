@@ -1,9 +1,11 @@
+import { Project } from 'src/project/domain/entity/project.entity';
 import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -34,6 +36,10 @@ export class User {
 
     @Column({ name: 'is_active', default: false })
     public isActive: boolean;
+
+    @OneToMany(() => Project, (project) => project.user)
+    public projects: Project[];
+
 
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: Date;

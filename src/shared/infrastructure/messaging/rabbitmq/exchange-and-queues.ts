@@ -12,4 +12,8 @@ export const ExchangesAndQueues: {
         DeclarationQueues.authentication_created,
         DeclarationQueues.authentication_updated,
     ],
+    [DeclarationExchanges.project_exchange]: [
+        DeclarationQueues.project_created,
+        DeclarationQueues.project_updated,
+    ],
 };
