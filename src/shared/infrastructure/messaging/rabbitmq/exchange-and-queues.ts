@@ -20,4 +20,8 @@ export const ExchangesAndQueues: {
         DeclarationQueues.projectexpenserequest_created,
         DeclarationQueues.projectexpenserequest_updated,
     ],
+    [DeclarationExchanges.projectexpenserequestapproval_exchange]: [
+        DeclarationQueues.projectexpenserequestapproval_created,
+        DeclarationQueues.projectexpenserequestapproval_updated,
+    ],
 };

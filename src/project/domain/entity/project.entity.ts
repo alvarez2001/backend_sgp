@@ -40,7 +40,7 @@ export class Project {
     @Column({ name: 'alias' })
     alias: string;
 
-    @Column({ name: 'user_id' })
+    @Column({ name: 'user_id', nullable: true })
     userId: number;
 
     @ManyToOne(() => User, user => user.projects)
