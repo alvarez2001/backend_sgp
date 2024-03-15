@@ -14,5 +14,8 @@ export enum DeclarationQueues {
 
     'projectexpenserequestapproval_created' = 'projectexpenserequestapproval.created',
     'projectexpenserequestapproval_updated' = 'projectexpenserequestapproval.updated',
+
+    'projectexpenserequestproduct_created' = 'projectexpenserequestproduct.created',
+    'projectexpenserequestproduct_updated' = 'projectexpenserequestproduct.updated',
     
 }

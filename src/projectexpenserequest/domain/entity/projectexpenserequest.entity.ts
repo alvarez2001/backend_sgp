@@ -1,5 +1,6 @@
 import { Project } from 'src/project/domain/entity/project.entity';
 import { ProjectExpenseRequestApproval } from 'src/projectexpenserequestapproval/domain/entity/projectexpenserequestapproval.entity';
+import { ProjectExpenseRequestProduct } from 'src/projectexpenserequestproduct/domain/entity/projectexpenserequestproduct.entity';
 import { User } from 'src/user/domain/entity/user.entity';
 import {
     Entity,
@@ -57,6 +58,12 @@ export class ProjectExpenseRequest {
         projectExpenseRequestApproval => projectExpenseRequestApproval.expenseRequest,
     )
     approvals: ProjectExpenseRequestApproval[];
+
+    @OneToMany(
+        () => ProjectExpenseRequestProduct,
+        projectExpenseRequestProduct => projectExpenseRequestProduct.expenseRequest,
+    )
+    products: ProjectExpenseRequestProduct[];
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;

@@ -4,4 +4,5 @@ export const enum DeclarationExchanges {
     'project_exchange' = 'project_exchange',
     'projectexpenserequest_exchange' = 'projectexpenserequest_exchange',
     'projectexpenserequestapproval_exchange' = 'projectexpenserequestapproval_exchange',
+    'projectexpenserequestproduct_exchange' = 'projectexpenserequestproduct_exchange',
 }

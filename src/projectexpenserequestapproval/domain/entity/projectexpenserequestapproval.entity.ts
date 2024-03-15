@@ -16,7 +16,7 @@ export class ProjectExpenseRequestApproval {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column({ name: 'status', comment: 'REVIEWED | AUTHORIZED | EXECUTED | REFUSED' })
+    @Column({ name: 'type', comment: 'REVIEWED | AUTHORIZED | EXECUTED | REFUSED' })
     type: string;
 
     @Column({ name: 'responsible' })

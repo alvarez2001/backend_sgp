@@ -10,6 +10,7 @@ import { JwtAuthGuard } from './authentication/application/guards/jwt-auth.guard
 import { ProjectModule } from './project/project.module';
 import { ProjectExpenseRequestModule } from './projectexpenserequest/projectexpenserequest.module';
 import { ProjectExpenseRequestApprovalModule } from './projectexpenserequestapproval/projectexpenserequestapproval.module';
+import { ProjectExpenseRequestProductModule } from './projectexpenserequestproduct/projectexpenserequestproduct.module';
 
 @Module({
     imports: [
@@ -38,6 +39,7 @@ import { ProjectExpenseRequestApprovalModule } from './projectexpenserequestappr
         ProjectModule,
         ProjectExpenseRequestModule,
         ProjectExpenseRequestApprovalModule,
+        ProjectExpenseRequestProductModule,
     ],
     controllers: [],
     providers: [
